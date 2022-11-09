@@ -1,0 +1,16 @@
+/* Write your global styles here, in PostCSS syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	body {
+		font-family: 'Work Sans', sans-serif;
+	}
+	h1,
+	h2,
+	h3,
+	h4 {
+		font-family: 'Work Sans', sans-serif @apply font-semibold;
+	}
+}
