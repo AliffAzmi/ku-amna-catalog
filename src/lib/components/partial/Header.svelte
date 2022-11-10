@@ -1,6 +1,9 @@
 <script>
 	import Icon from '@iconify/svelte';
+	let y;
 </script>
+
+<svelte:window bind:scrollY={y} />
 
 <header class=" bg-inherit sticky top-0 z-50 border-b-2 border-red-200">
 	<nav id="header" class="w-full z-30 top-0 py-1">
@@ -46,8 +49,8 @@
 				>
 					<img
 						class=" mr-2"
-						width="120"
-						height="120"
+						width={y < 50 ? 120 : 80}
+						height={y < 50 ? 120 : 80}
 						src="/images/logo_rectangle_transparent.png"
 						alt="logo"
 					/>
