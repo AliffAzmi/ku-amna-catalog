@@ -2,7 +2,7 @@
 	import Icon from '@iconify/svelte';
 </script>
 
-<header>
+<header class=" bg-inherit sticky top-0 z-50 border-b-2 border-red-200">
 	<nav id="header" class="w-full z-30 top-0 py-1">
 		<div
 			class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3"
@@ -67,15 +67,17 @@
 			</div>
 
 			<div class="order-2 md:order-3 flex items-center" id="nav-content">
-				<a class="inline-block no-underline hover:text-black" href="https://t.me/AliffAzmiey">
-					<Icon class="w-6 h-6" icon="ph:telegram-logo-light" />
+				<a class="inline-block no-underline" href="https://www.facebook.com/ku.amna">
+					<Icon class="w-6 h-6" icon="icon-park:facebook" />
 				</a>
-				<a
-					class="pl-3 inline-block no-underline hover:text-black"
-					href="mailto:fizlinmohammad@gmail.com"
-					target="_blank"
-				>
-					<Icon class="w-6 h-6" icon="ant-design:mail-outlined" />
+				<a class="pl-3 inline-block no-underline" href="wa.link/wyfmjo">
+					<Icon class="w-6 h-6 text-orange-600" icon="logos:whatsapp-icon" />
+				</a>
+				<a class="pl-3 inline-block no-underline" href="https://t.me/AliffAzmiey">
+					<Icon class="w-6 h-6" icon="logos:telegram" />
+				</a>
+				<a class="pl-3 inline-block no-underline" href="shopee.com.my/lilieymohd">
+					<Icon class="w-6 h-6 text-orange-600" icon="simple-icons:shopee" />
 				</a>
 			</div>
 		</div>

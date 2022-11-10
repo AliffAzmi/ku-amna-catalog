@@ -1,4 +1,4 @@
-<footer>
+<footer class="border-t-2 border-red-200">
 	<div class="container mx-auto px-6 py-3 flex justify-between items-center">
 		<img
 			class=" mr-2"
