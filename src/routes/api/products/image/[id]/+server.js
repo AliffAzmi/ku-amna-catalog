@@ -1,4 +1,4 @@
-import { URL, URLSearchParams } from 'url'
+// import { URL, URLSearchParams } from 'url'
 
 import { 
     SQUAREUP_API_URL, 
@@ -10,7 +10,7 @@ import {
 export async function GET ({ params }) {
 
     const { id } = params
-    var endpoint = new URL(`${ SQUAREUP_API_URL }/catalog/object/${id}`)
+    var endpoint = `${ SQUAREUP_API_URL }/catalog/object/${id}`
     const option = {
         method: 'GET',
         headers: {
