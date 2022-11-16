@@ -1,3 +1,7 @@
+<script>
+	export let label = 'Latest Product';
+</script>
+
 <nav id="latest_product" class="w-full z-30 top-0 px-6 py-1">
 	<div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3">
 		<!-- svelte-ignore a11y-invalid-attribute -->
@@ -5,7 +9,7 @@
 			class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl "
 			href="#"
 		>
-			Latest product
+			{label}
 		</a>
 
 		<!-- <div class="flex items-center" id="store-nav-content">

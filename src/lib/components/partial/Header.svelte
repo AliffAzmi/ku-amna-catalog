@@ -3,6 +3,9 @@
 	let y;
 </script>
 
+<!-- on:scroll
+1. if < 50 add class transform: translate&Y(0%) else transform: translate&Y(-100%) -->
+
 <svelte:window bind:scrollY={y} />
 
 <header class=" bg-inherit sticky top-0 z-50 border-b-2 border-red-200">
@@ -33,11 +36,12 @@
 								href="/">Home</a
 							>
 						</li>
-						<!-- <li>
-						<a class="inline-block no-underline hover:text-black hover:underline py-2 px-4" href="#"
-							>About</a
-						>
-					</li> -->
+						<li>
+							<a
+								class="inline-block no-underline hover:text-black hover:underline py-2 px-4"
+								href="/products">Products</a
+							>
+						</li>
 					</ul>
 				</nav>
 			</div>
