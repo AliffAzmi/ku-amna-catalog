@@ -5,15 +5,16 @@ import {
     SQUAREUP_SANDBOX_ACCESS_TOKEN 
 } from '$env/static/private'
 
-import db from '$lib/db'
+// import db from '$lib/db'
 
 export async function load ({ url, params }) {
     try {
-      const categories = await db.collection('categories').find().toArray()
+    //   const categories = await db.collection('categories').find().toArray()
       const products = await getProducts()
       return {
           status: 200,
-          categories: categories.map(items => items.category_data),
+        //   categories: categories.map(items => items.category_data),
+          categories: [],
           products: products
       }
     } catch (error) {

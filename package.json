@@ -29,7 +29,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"mongodb": "^4.11.0",
 		"svelte-loading-spinners": "^0.3.4"
 	}
 }
