@@ -1,5 +1,5 @@
 <script>
-	export let categories = [];
+	export let categories;
 </script>
 
 <div class="grid grid-rows-2 grid-cols-1 md:grid-cols-2 gap-4">
@@ -10,7 +10,7 @@
 		>
 			<div class="bg-gray-900 bg-opacity-50 flex items-center h-full">
 				<div class="px-10 max-w-xl">
-					<h2 class="text-2xl text-white font-semibold">{category?.name}</h2>
+					<h2 class="text-2xl text-white font-semibold">{category?.category_data?.name}</h2>
 					<p class="mt-2 text-gray-400">{category?.description}</p>
 					<button
 						class="flex items-center mt-4 text-white text-sm uppercase font-medium rounded hover:underline focus:outline-none"

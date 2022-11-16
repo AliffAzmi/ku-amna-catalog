@@ -4,7 +4,8 @@
 	import ProductLabel from '$lib/components/ProductLabel.svelte';
 
 	const categories = $$props?.data?.categories || [];
-	const products = $$props?.data?.products?.objects || [];
+	const products = $$props?.data?.products || [];
+
 </script>
 
 <section class="py-8">
