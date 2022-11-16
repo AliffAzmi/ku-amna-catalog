@@ -1,5 +1,3 @@
-import { URL, URLSearchParams } from 'url'
-
 import { 
     SQUAREUP_API_URL, 
     SQUAREUP_SANDBOX_API_URL, 
@@ -24,9 +22,7 @@ export async function load ({ url, params }) {
 }
 
 const getProducts = async (limit=8) => {
-    var url = new URL(`${ SQUAREUP_API_URL }/catalog/list`)
-    let params = { types: 'ITEM' }
-    url.search = new URLSearchParams(params).toString();
+    var url = `${ SQUAREUP_API_URL }/catalog/list?types=ITEM`
     const option = {
         method: 'GET',
         headers: {

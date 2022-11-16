@@ -1,5 +1,3 @@
-// import { URL, URLSearchParams } from 'url'
-
 import { 
     SQUAREUP_API_URL, 
     SQUAREUP_SANDBOX_API_URL, 
