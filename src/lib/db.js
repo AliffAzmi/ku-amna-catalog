@@ -1,9 +1,9 @@
 import { MongoClient, ServerApiVersion } from 'mongodb'
-import * as dotenv from 'dotenv'
-dotenv.config()
-// import { MONGODB_URL } from '$env/static/private'
+// import * as dotenv from 'dotenv'
+// dotenv.config()
+import { MONGODB_URL } from '$env/static/private'
 
-const client = new MongoClient(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 } )
+const client = new MongoClient(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 } )
 
 await client.connect()
 // client.connect(async err => {
