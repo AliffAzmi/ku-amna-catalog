@@ -15,10 +15,6 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Products</title>
-</svelte:head>
-
 <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
 	<!-- svelte-ignore a11y-invalid-attribute -->
 	<a href="#">

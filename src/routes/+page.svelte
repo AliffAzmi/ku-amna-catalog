@@ -8,6 +8,10 @@
 
 </script>
 
+<svelte:head>
+	<title>Home</title>
+</svelte:head>
+
 <section class="py-8">
 	<CategoriesGrid {categories} />
 </section>

@@ -5,6 +5,10 @@
 	const products = $$props?.data?.products?.objects || [];
 </script>
 
+<svelte:head>
+	<title>Products</title>
+</svelte:head>
+
 <section class="py-8">
 	<div class="flex items-center flex-wrap pt-4 pb-12">
 		<ProductLabel label={'Products'} />
