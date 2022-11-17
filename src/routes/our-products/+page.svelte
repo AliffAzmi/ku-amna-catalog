@@ -6,10 +6,10 @@
 </script>
 
 <svelte:head>
-	<title>Products</title>
+	<title>Our Products - Ku Amna</title>
 </svelte:head>
 
-<section class="py-8">
+<section class="py-8" sveltekit:prefetch>
 	<div class="flex items-center flex-wrap pt-4 pb-12">
 		<ProductLabel label={'Products'} />
 		{#each products as product}

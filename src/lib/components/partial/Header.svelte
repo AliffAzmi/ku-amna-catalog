@@ -1,4 +1,5 @@
 <script>
+	import { page, navigating } from '$app/stores';
 	import Icon from '@iconify/svelte';
 	let y;
 </script>
@@ -31,15 +32,13 @@
 				<nav>
 					<ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
 						<li>
-							<a
-								class="inline-block no-underline hover:text-black hover:underline py-2 px-4"
-								href="/">Home</a
+							<a class="inline-block no-underline hover:text-black py-2 px-4" href="/"
+								><span class:active={$page.url.pathname === '/'}>Home</span></a
 							>
 						</li>
 						<li>
-							<a
-								class="inline-block no-underline hover:text-black hover:underline py-2 px-4"
-								href="/products">Products</a
+							<a class="inline-block no-underline hover:text-black py-2 px-4" href="/our-products"
+								><span class:active={$page.url.pathname === '/our-products'}>Our Products</span></a
 							>
 						</li>
 					</ul>
@@ -74,16 +73,36 @@
 			</div>
 
 			<div class="order-2 md:order-3 flex items-center" id="nav-content">
-				<a class="inline-block no-underline" href="https://www.facebook.com/ku.amna">
+				<a
+					class="inline-block no-underline"
+					target="_blank"
+					rel="noreferrer"
+					href="https://www.facebook.com/ku.amna"
+				>
 					<Icon class="w-6 h-6" icon="icon-park:facebook" />
 				</a>
-				<a class="pl-3 inline-block no-underline" href="wa.link/wyfmjo">
+				<a
+					class="pl-3 inline-block no-underline"
+					target="_blank"
+					rel="noreferrer"
+					href="wa.link/wyfmjo"
+				>
 					<Icon class="w-6 h-6 text-orange-600" icon="logos:whatsapp-icon" />
 				</a>
-				<a class="pl-3 inline-block no-underline" href="https://t.me/AliffAzmiey">
+				<a
+					class="pl-3 inline-block no-underline"
+					target="_blank"
+					rel="noreferrer"
+					href="https://t.me/AliffAzmiey"
+				>
 					<Icon class="w-6 h-6" icon="logos:telegram" />
 				</a>
-				<a class="pl-3 inline-block no-underline" href="shopee.com.my/lilieymohd">
+				<a
+					class="pl-3 inline-block no-underline"
+					target="_blank"
+					rel="noreferrer"
+					href="https://shopee.com.my/lilieymohd"
+				>
 					<Icon class="w-6 h-6 text-orange-600" icon="simple-icons:shopee" />
 				</a>
 			</div>
@@ -111,3 +130,9 @@
 		/>
 	</div> -->
 </header>
+
+<style>
+	.active {
+		@apply border-b-2 border-red-300;
+	}
+</style>

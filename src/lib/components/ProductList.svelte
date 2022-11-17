@@ -1,5 +1,14 @@
 <script>
 	import { onMount } from 'svelte';
+
+	let loaded = false;
+	let thisImage;
+
+	onMount(() => {
+		thisImage.onload = () => {
+			loaded = true;
+		};
+	});
 	export let item;
 	onMount(async () => {
 		if (item.item_data.image_ids && item.item_data.image_ids.length) {
@@ -16,22 +25,38 @@
 </script>
 
 <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-	<!-- svelte-ignore a11y-invalid-attribute -->
-	<a href="#">
-		<img alt="item img url" class="hover:grow hover:shadow-lg" src={item?.img_url} />
-		<div class="pt-3 flex items-center justify-between">
-			<p class="">{item?.item_data?.name}</p>
-		</div>
-		<p class="pt-1 text-gray-900">
-			{`${
-				item?.item_data?.variations[0]
-					? `RM${(
-							Math.round(
-								item?.item_data?.variations[0]?.item_variation_data?.price_money?.amount * 1
-							) / 100
-					  ).toFixed(2)}`
-					: '-'
-			}`}
-		</p>
-	</a>
+	<!-- <a href="#"> -->
+	<img
+		alt="item img url"
+		class="hover:grow hover:shadow-lg"
+		class:loaded
+		src={item?.img_url}
+		bind:this={thisImage}
+	/>
+	<div class="pt-3 flex items-center justify-between">
+		<p class="">{item?.item_data?.name}</p>
+	</div>
+	<p class="pt-1 text-gray-900">
+		{`${
+			item?.item_data?.variations[0]
+				? `RM${(
+						Math.round(
+							item?.item_data?.variations[0]?.item_variation_data?.price_money?.amount * 1
+						) / 100
+				  ).toFixed(2)}`
+				: '-'
+		}`}
+	</p>
+	<!-- </a> -->
 </div>
+
+<style>
+	img {
+		height: 264px;
+		opacity: 0;
+		transition: opacity 1200ms ease-out;
+	}
+	img.loaded {
+		opacity: 1;
+	}
+</style>
