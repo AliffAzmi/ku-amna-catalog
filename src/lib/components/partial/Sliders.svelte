@@ -16,7 +16,7 @@
 		{
 			id: 'carousel-1',
 			num: 1,
-			bg_img: './images/banner_1.png',
+			bg_img: '/images/banner_1.png',
 			target: '_blank',
 			url: 'https://forms.gle/XkTgSif4E5Vu4gNU8'
 		}

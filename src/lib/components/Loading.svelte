@@ -8,7 +8,7 @@
 	<div class="loader-wrapper">
 		<div class="u-loading">
 			<div class="u-loading__symbol">
-				<img src="./images/logo_square_transparent.png" alt="" />
+				<img src="/images/logo_square_transparent.png" alt="" />
 			</div>
 		</div>
 	</div>

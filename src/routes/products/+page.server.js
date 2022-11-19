@@ -1,17 +1,13 @@
 import { 
-    SQUAREUP_API_URL, 
-    SQUAREUP_SANDBOX_API_URL, 
-    SQUAREUP_ACCESS_TOKEN, 
-    SQUAREUP_SANDBOX_ACCESS_TOKEN 
+    SQUAREUP_API_URL,
+    SQUAREUP_ACCESS_TOKEN
 } from '$env/static/private'
 
 export async function load ({ url, params }) {
     try {
-      const categories = await getPayload('CATEGORY')
-      const products = await getPayload('ITEM')
+      const products = await getProducts()
       return {
           status: 200,
-          categories: categories,
           products: products
       }
     } catch (error) {
@@ -19,8 +15,8 @@ export async function load ({ url, params }) {
     }
 }
 
-const getPayload = async (type, limit=8) => {
-    var url = `${ SQUAREUP_API_URL }/catalog/list?types=${type}`
+const getProducts = async (limit=100) => {
+    var url = `${ SQUAREUP_API_URL }/catalog/list?types=ITEM`
     const option = {
         method: 'GET',
         headers: {
@@ -31,19 +27,10 @@ const getPayload = async (type, limit=8) => {
     try {
         const response = await fetch(url, option)
         let resJSON = await response.json()
-        let payload = {}
-        if(resJSON.objects){
-            payload = Promise.all(resJSON.objects.slice(0, limit).map(async item => {
-                if(item.type === 'CATEGORY'){
-                    item.img_url = `${item.category_data.name.split(' ').join('_').toLowerCase()}_cat_cover.png`
-                } else {
-                    item.img_url = await getFeaturedImage(item)
-                }
-                return item
-            }))
-        }else{
-            payload = resJSON
-        }
+        const payload = Promise.all(resJSON.objects.map(async items => {
+            items.img_url = await getFeaturedImage(items)
+            return items
+        }))
         return payload
     } catch (error) {
         console.log(error)

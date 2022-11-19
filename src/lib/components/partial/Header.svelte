@@ -37,8 +37,8 @@
 							>
 						</li>
 						<li>
-							<a class="inline-block no-underline hover:text-black py-2 px-4" href="/our-products"
-								><span class:active={$page.url.pathname === '/our-products'}>Our Products</span></a
+							<a class="inline-block no-underline hover:text-black py-2 px-4" href="/products"
+								><span class:active={$page.url.pathname === '/products'}>Our Products</span></a
 							>
 						</li>
 					</ul>
