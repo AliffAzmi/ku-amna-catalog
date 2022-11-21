@@ -3,6 +3,7 @@
 	import { productID } from '$lib/stores';
 	import { page } from '$app/stores';
 	import { toTitleCase } from '$lib/utils';
+	import ProductSingle from '../../../lib/components/ProductSingle.svelte';
 
 	export let { slug } = $page.params;
 	let loading = true;
@@ -33,7 +34,8 @@
 	{#if loading}
 		Loading
 	{:else}
-		<div class=" block md:flex gap-4">
+		<ProductSingle {product} {productCategory} {productFeaturedImage} />
+		<!-- <div class=" block md:flex gap-4">
 			<div>
 				<img src={productFeaturedImage.image_data.url} width="500px" alt="product featured" />
 			</div>
@@ -43,8 +45,22 @@
 						{product.item_data.name}
 					</h1>
 				</div>
+				<div>
+					<h2>Color</h2>
+					<div class=" flex gap-2">
+						<span>Red</span>
+						<span>Blue</span>
+					</div>
+				</div>
+				<div>
+					<h2>Size</h2>
+					<div class="flex gap-2">
+						<span>S</span>
+						<span>M</span>
+					</div>
+				</div>
 				<div>{@html product.item_data.description_html}</div>
 			</div>
-		</div>
+		</div> -->
 	{/if}
 </section>
