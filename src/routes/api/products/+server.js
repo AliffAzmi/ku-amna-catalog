@@ -8,13 +8,26 @@ import {
 export async function GET ({ url }) {
 
     const limit = url.searchParams.get('limit') || 10
-    var url = `${ SQUAREUP_API_URL }/catalog/list?types=ITEM`
+    const categoryID = url.searchParams.get('cat')
+    
     const option = {
-        method: 'GET',
         headers: {
             'Authorization': `Bearer ${ SQUAREUP_ACCESS_TOKEN }`
         }
     }
+
+    if(categoryID){
+        var url = `${ SQUAREUP_API_URL }/catalog/search-catalog-items`
+        const categoryIds = {}
+        categoryIds.category_ids = [categoryID]
+        categoryIds.limit = parseInt(limit)
+        option.method = 'POST'
+        option.body = JSON.stringify(categoryIds)
+    }else{
+        var url = `${ SQUAREUP_API_URL }/catalog/list?types=ITEM`
+        option.method = 'GET'
+    }
+    
 
     try {
         const response = await fetch(url, option)
@@ -23,6 +36,11 @@ export async function GET ({ url }) {
 
         if(resJSON.objects){
             payload.objects = await Promise.all(resJSON.objects.slice(0, limit).map(async item => {
+                item.img_url = await getFeaturedImage(item)
+                return item
+            }))
+        }else if(resJSON.items){
+            payload.objects = await Promise.all(resJSON.items.map(async item => {
                 item.img_url = await getFeaturedImage(item)
                 return item
             }))

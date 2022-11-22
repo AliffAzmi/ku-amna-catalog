@@ -1,16 +1,30 @@
 <script>
-	import Icon from '@iconify/svelte';
 	import { onMount } from 'svelte';
+	import Icon from '@iconify/svelte';
+	import { Swiper, SwiperSlide } from 'swiper/svelte';
+	import { FreeMode, Navigation, Thumbs } from 'swiper';
+
 	import ProductList from './ProductList.svelte';
+
+	import 'swiper/css';
+	import 'swiper/css/free-mode';
+	import 'swiper/css/navigation';
+	import 'swiper/css/thumbs';
 
 	let loading = true;
 	let relatedProducts = [];
+	let thumbsSwiper = null;
+	let breakpoints = {
+		320: { spaceBetween: 8 },
+		640: { spaceBetween: 14 }
+	};
 	export let product;
 	export let productCategory;
-	export let productFeaturedImage;
+	export let productImages;
+	// export let productFeaturedImage;
 
 	onMount(async () => {
-		const response = await fetch(`/api/products?limit=4`, {
+		const response = await fetch(`/api/products?limit=4&cat=${productCategory.id}`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'
@@ -20,49 +34,85 @@
 		relatedProducts = objects;
 		loading = false;
 	});
+
+	const setThumbsSwiper = (e) => {
+		const [swiper] = e.detail;
+		setTimeout(() => {
+			thumbsSwiper = swiper;
+		});
+	};
+
+	const handleDownloadImage = async (url) => {
+		let link = document.createElement('a');
+		document.documentElement.append(link);
+		await fetch(
+			url
+			// {
+			// 	mode: 'no-cors'
+			// }
+		)
+			.then((response) => response.blob())
+			.then((blob) => {
+				let blobUrl = URL.createObjectURL(blob);
+				link.setAttribute('download', `image.jpg`);
+				link.href = blobUrl;
+
+				link.click();
+				// let a = document.createElement('a');
+				// a.download = url.replace(/^.*[\\\/]/, '');
+				// a.href = blobUrl;
+				// document.body.appendChild(a);
+				// a.click();
+				// a.remove();
+			});
+	};
 </script>
 
 <div class="-mx-5 flex flex-col justify-between py-16 lg:flex-row">
 	<div class="flex flex-col-reverse justify-between px-5 sm:flex-row-reverse lg:w-1/2 lg:flex-row">
-		<!-- <div class="flex flex-row sm:flex-col sm:pl-5 md:pl-4 lg:pl-0 lg:pr-2 xl:pr-3">
-			<div class="relative mr-3 w-28 pb-5 sm:w-32 sm:pr-0 lg:w-24 xl:w-28">
-				<div
-					class="relative flex w-full items-center justify-center rounded border border-grey bg-v-pink"
-				>
-					<img
-						class="cursor-pointer object-cover"
-						alt="product image"
-						src="/assets/img/unlicensed/backpack-2.png"
-					/>
-				</div>
-			</div>
-
-			<div class="relative mr-3 w-28 pb-5 sm:w-32 sm:pr-0 lg:w-24 xl:w-28">
-				<div
-					class="relative flex w-full items-center justify-center rounded border border-grey bg-v-pink"
-				>
-					<img
-						class="cursor-pointer object-cover"
-						alt="product image"
-						src="/assets/img/unlicensed/backpack-03-1.png"
-					/>
-				</div>
-			</div>
-
-			<div class="relative mr-3 w-28 pb-5 sm:w-32 sm:pr-0 lg:w-24 xl:w-28">
-				<div
-					class="relative flex w-full items-center justify-center rounded border border-grey bg-v-pink"
-				>
-					<img
-						class="cursor-pointer object-cover"
-						alt="product image"
-						src="/assets/img/unlicensed/backpack-03-2.png"
-					/>
-				</div>
-			</div>
-		</div> -->
 		<div class="relative w-full pb-5 sm:pb-0">
-			<div
+			<Swiper
+				style="--swiper-navigation-color: #fff;--swiper-pagination-color: #fff"
+				loop={true}
+				spaceBetween={12}
+				navigation={false}
+				modules={[FreeMode, Navigation, Thumbs]}
+				class="mySwiper2"
+				thumbs={{ swiper: thumbsSwiper }}
+			>
+				{#each productImages as item}
+					<SwiperSlide>
+						<span class=" absolute bottom-1 right-1 z-0">
+							<button
+								on:click={handleDownloadImage(item?.image_data?.url)}
+								class="px-2 py-2 bg-blue-500 rounded-full drop-shadow-lg text-sm text-center text-white duration-300 hover:bg-blue-700 flex items-center"
+							>
+								<Icon class="w-4 h-4 mr-2" icon="material-symbols:download" />
+								<!-- <a href={item?.image_data?.url} download target="_blank" rel="noreferrer"
+									>Download</a> -->
+								Download
+							</button>
+						</span>
+						<img src={item?.image_data?.url} alt="product img" />
+					</SwiperSlide>
+				{/each}
+			</Swiper>
+			<Swiper
+				on:swiper={setThumbsSwiper}
+				loop={true}
+				spaceBetween={14}
+				slidesPerView={productImages && productImages.length > 3 ? 4 : 3}
+				freeMode={true}
+				watchSlidesProgress={true}
+				modules={[FreeMode, Navigation, Thumbs]}
+				class="mySwiper"
+				{breakpoints}
+			>
+				{#each productImages as item}
+					<SwiperSlide><img src={item?.image_data?.url} alt="product img slider" /></SwiperSlide>
+				{/each}
+			</Swiper>
+			<!-- <div
 				class="aspect-w-1 aspect-h-1 relative flex items-center justify-center rounded border border-grey bg-v-pink"
 			>
 				<img
@@ -70,7 +120,7 @@
 					alt="product featured"
 					src={productFeaturedImage.image_data.url}
 				/>
-			</div>
+			</div> -->
 		</div>
 	</div>
 
@@ -190,6 +240,7 @@
 			{@html product.item_data.description_html.split('</p>')[0]}
 			{@html product.item_data.description_html.split('</p>')[1]}
 		</div>
+
 		<div class="mb-8">
 			<div class="flex flex-wrap items-center mt-8">
 				<a href="https://t.me/EyleenMohammad" target="_blank" rel="noreferrer">
@@ -225,6 +276,31 @@
 			<div class="mx-auto text-center sm:text-left">
 				<div class=" leading-loose text-sm">
 					{@html product.item_data.description_html}
+				</div>
+			</div>
+		</div>
+
+		<div class="flex flex-col">
+			<div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+				<div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+					<div class="overflow-hidden">
+						<table class="min-w-full border-2 text-center">
+							<tbody>
+								<tr>
+									<td class="border-2 px-4 py-2">Color</td>
+									<td class="border-2 px-4 py-2 font-bold">Indigo, Blue, Red, White, Blue</td>
+								</tr>
+								<tr class="bg-gray-100">
+									<td class="border-2 px-4 py-2">Material</td>
+									<td class="border-2 px-4 py-2 font-bold">Satin</td>
+								</tr>
+								<tr>
+									<td class="border-2 px-4 py-2">Weight</td>
+									<td class="border-2 px-4 py-2 font-bold">0.5g</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -4,7 +4,8 @@
 	import { loading } from '$lib/loading';
 
 	import '../app.postcss';
-	import "nprogress/nprogress.css";
+	import '../style.css';
+	import 'nprogress/nprogress.css';
 
 	import Loading from '$lib/components/Loading.svelte';
 	import Header from '$lib/components/partial/Header.svelte';
@@ -13,7 +14,8 @@
 	import Analytics from '$lib/components/Analytics.svelte';
 
 	NProgress.configure({
-		template: '<div class="bar" style="background: #eb9797 !important; height: 3px !important;" role="bar"></div>',
+		template:
+			'<div class="bar" style="background: #eb9797 !important; height: 3px !important;" role="bar"></div>',
 		minimum: 0.3,
 		showSpinner: false
 	});
