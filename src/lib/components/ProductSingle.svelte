@@ -33,38 +33,44 @@
 		const { objects } = await response.json();
 		relatedProducts = objects;
 		loading = false;
+
+		// const swiper = document.querySelector('.mySwiper2');
+		// swiper.querySelectorAll('.swiper-slide-active').forEach((span) => {
+		// 	const img = span.querySelector('img');
+		// 	const button = span.querySelector('#donwload_image');
+		// 	toDataUrl(img, function (myBase64) {
+		// 		const a = document.createElement('a');
+		// 		a.id = 'testttt';
+		// 		a.href = myBase64;
+		// 		a.text = 'download';
+		// 		a.download = img.src.replace(/^.*[\\\/]/, '');
+		// 		button.appendChild(a);
+		// 	});
+		// });
 	});
+
+	function toDataUrl(url, callback) {
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function () {
+			var reader = new window.FileReader();
+			reader.onloadend = function () {
+				callback(reader.result);
+				var img = document.createElement('img');
+				img.src = reader.result;
+				document.body.appendChild(img);
+			};
+			reader.readAsDataURL(xhr.response);
+		};
+		xhr.open('GET', url);
+		xhr.responseType = 'blob';
+		xhr.send();
+	}
 
 	const setThumbsSwiper = (e) => {
 		const [swiper] = e.detail;
 		setTimeout(() => {
 			thumbsSwiper = swiper;
 		});
-	};
-
-	const handleDownloadImage = async (url) => {
-		let link = document.createElement('a');
-		document.documentElement.append(link);
-		await fetch(
-			url
-			// {
-			// 	mode: 'no-cors'
-			// }
-		)
-			.then((response) => response.blob())
-			.then((blob) => {
-				let blobUrl = URL.createObjectURL(blob);
-				link.setAttribute('download', `image.jpg`);
-				link.href = blobUrl;
-
-				link.click();
-				// let a = document.createElement('a');
-				// a.download = url.replace(/^.*[\\\/]/, '');
-				// a.href = blobUrl;
-				// document.body.appendChild(a);
-				// a.click();
-				// a.remove();
-			});
 	};
 </script>
 
@@ -83,14 +89,15 @@
 				{#each productImages as item}
 					<SwiperSlide>
 						<span class=" absolute bottom-1 right-1 z-0">
+							<!-- on:click={handleDownloadImage(item?.image_data?.url)} -->
 							<button
-								on:click={handleDownloadImage(item?.image_data?.url)}
 								class="px-2 py-2 bg-blue-500 rounded-full drop-shadow-lg text-sm text-center text-white duration-300 hover:bg-blue-700 flex items-center"
+								data-url={item?.image_data?.url}
 							>
 								<Icon class="w-4 h-4 mr-2" icon="material-symbols:download" />
-								<!-- <a href={item?.image_data?.url} download target="_blank" rel="noreferrer"
-									>Download</a> -->
-								Download
+								<a href={item?.image_data?.url} download target="_blank" rel="noreferrer"
+									>Download</a
+								>
 							</button>
 						</span>
 						<img src={item?.image_data?.url} alt="product img" />
