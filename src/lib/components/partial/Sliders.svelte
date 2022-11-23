@@ -10,8 +10,10 @@
 			id: 'carousel-3',
 			num: 3,
 			title: 'Brown and blue hardbound book',
+			target: '_blank',
 			bg_img:
-				'https://images.unsplash.com/photo-1519327232521-1ea2c736d34d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80'
+				'https://images.unsplash.com/photo-1519327232521-1ea2c736d34d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80',
+			url: 'https://forms.gle/XkTgSif4E5Vu4gNU8'
 		},
 		{
 			id: 'carousel-1',
