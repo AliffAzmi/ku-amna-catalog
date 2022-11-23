@@ -12,7 +12,7 @@
 <header class=" bg-inherit sticky top-0 z-50 border-b-2 border-red-200">
 	<nav id="header" class="w-full z-30 top-0 py-1">
 		<div
-			class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3"
+			class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3"
 		>
 			<label for="menu-toggle" class="cursor-pointer md:hidden block">
 				<svg
@@ -52,9 +52,9 @@
 				>
 					<img
 						class=" mr-2"
-						width={y < 50 ? 120 : 80}
-						height={y < 50 ? 120 : 80}
-						src="/images/logo_rectangle_transparent.png"
+						width={y < 50 ? 160 : 140}
+						height={y < 50 ? 160 : 140}
+						src="/images/fm_logo_rectangle.png"
 						alt="logo"
 					/>
 					<!-- <svg

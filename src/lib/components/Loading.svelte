@@ -19,8 +19,8 @@
 		@apply fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden bg-white opacity-100 flex flex-col items-center justify-center;
 	}
 	.u-loading {
-		width: 128px;
-		height: 128px;
+		width: 200px;
+		height: 200px;
 		display: block;
 		margin: 48px;
 	}

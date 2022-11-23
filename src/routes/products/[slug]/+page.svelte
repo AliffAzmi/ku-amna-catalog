@@ -4,13 +4,14 @@
 	import { page } from '$app/stores';
 	import { toTitleCase } from '$lib/utils';
 	import ProductSingle from '$lib/components/ProductSingle.svelte';
+	import SkeletonProductSingle from '$lib/components/SkeletonProductSingle.svelte';
 
 	export let { slug } = $page.params;
 	let loading = true;
 	let product = {};
 	let productCategory = {};
 	let productFeaturedImage = {};
-	let productImages = []
+	let productImages = [];
 
 	onMount(async () => {
 		const response = await fetch(`/api/products/${$productID}`, {
@@ -22,8 +23,10 @@
 		const { object, related_objects } = await response.json();
 		product = object;
 		productCategory = related_objects ? related_objects[0] : {};
-		productImages = related_objects ? related_objects.filter(item => item.type === 'IMAGE') : [];
-		productFeaturedImage = related_objects ? related_objects.filter(item => item.type === 'IMAGE').shift() : {};
+		productImages = related_objects ? related_objects.filter((item) => item.type === 'IMAGE') : [];
+		productFeaturedImage = related_objects
+			? related_objects.filter((item) => item.type === 'IMAGE').shift()
+			: {};
 		loading = false;
 	});
 </script>
@@ -34,35 +37,8 @@
 
 <section class="py-8">
 	{#if loading}
-		Loading
+		<SkeletonProductSingle />
 	{:else}
 		<ProductSingle {product} {productCategory} {productImages} {productFeaturedImage} />
-		<!-- <div class=" block md:flex gap-4">
-			<div>
-				<img src={productFeaturedImage.image_data.url} width="500px" alt="product featured" />
-			</div>
-			<div>
-				<div>
-					<h1 class="text-2xl font-extrabold tracking-tight">
-						{product.item_data.name}
-					</h1>
-				</div>
-				<div>
-					<h2>Color</h2>
-					<div class=" flex gap-2">
-						<span>Red</span>
-						<span>Blue</span>
-					</div>
-				</div>
-				<div>
-					<h2>Size</h2>
-					<div class="flex gap-2">
-						<span>S</span>
-						<span>M</span>
-					</div>
-				</div>
-				<div>{@html product.item_data.description_html}</div>
-			</div>
-		</div> -->
 	{/if}
 </section>
