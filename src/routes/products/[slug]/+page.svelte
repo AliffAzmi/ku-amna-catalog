@@ -32,7 +32,7 @@
 </script>
 
 <svelte:head>
-	<title>{toTitleCase(slug)} - Ku Amna</title>
+	<title>{toTitleCase(slug)} - Fizlin Mohammad</title>
 </svelte:head>
 
 <section class="py-8">

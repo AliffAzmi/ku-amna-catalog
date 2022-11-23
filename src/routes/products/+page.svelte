@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>Our Products - Ku Amna</title>
+	<title>Our Products - Fizlin Mohammad</title>
 </svelte:head>
 
 <section class="py-8">

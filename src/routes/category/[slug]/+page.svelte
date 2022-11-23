@@ -25,6 +25,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Categories - Fizlin Mohammad</title>
+</svelte:head>
+
 <section class="py-8">
 	{#if loading}
 		<SkeletonProductList />

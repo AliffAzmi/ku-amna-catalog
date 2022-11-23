@@ -9,7 +9,7 @@
 </script>
 
 <svelte:head>
-	<title>Home - Ku Amna</title>
+	<title>Home - Fizlin Mohammad</title>
 </svelte:head>
 
 <section class="py-8">
