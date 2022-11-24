@@ -34,7 +34,7 @@
 <Header />
 <Sliders />
 <Analytics />
-<main class="container mx-auto px-4">
+<main class="container mx-auto px-4 scroll-smooth">
 	{#if $loading}
 		<Loading />
 	{:else}
