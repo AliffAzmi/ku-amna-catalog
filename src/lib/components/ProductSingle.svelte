@@ -4,18 +4,21 @@
 	import { Swiper, SwiperSlide } from 'swiper/svelte';
 	import { FreeMode, Navigation, Thumbs } from 'swiper';
 
-	import ProductList from './ProductList.svelte';
 	import { categoryID } from '$lib/stores';
+	import ProductList from './ProductList.svelte';
+	import BreadCrumbs from './BreadCrumbs.svelte';
 
 	import 'swiper/css';
 	import 'swiper/css/free-mode';
 	import 'swiper/css/navigation';
 	import 'swiper/css/thumbs';
-	import BreadCrumbs from './BreadCrumbs.svelte';
 
 	let loading = true;
+	let productStock = 0;
+	let productPrice = 0;
 	let relatedProducts = [];
 	let thumbsSwiper = null;
+	let variationActive = '';
 	let breakpoints = {
 		320: { spaceBetween: 8 },
 		640: { spaceBetween: 14 }
@@ -24,6 +27,15 @@
 	export let productCategory;
 	export let productImages;
 	// export let productFeaturedImage;
+
+	productStock = product.item_data.total_stock;
+	productPrice = product?.item_data?.variations[0]
+		? `RM${(
+				Math.round(
+					product?.item_data?.variations[0]?.item_variation_data?.price_money?.amount * 1
+				) / 100
+		  ).toFixed(2)}`
+		: '-';
 
 	onMount(async () => {
 		const response = await fetch(`/api/products?limit=4&cat=${productCategory.id}`, {
@@ -73,6 +85,12 @@
 		setTimeout(() => {
 			thumbsSwiper = swiper;
 		});
+	};
+
+	const handleDataVariations = (item_id, data) => {
+		productStock = data.stock ? data.stock.counts[0].quantity : 0;
+		productPrice = `RM${(Math.round(data?.price_money?.amount * 1) / 100).toFixed(2)}`;
+		variationActive = item_id;
 	};
 </script>
 
@@ -156,7 +174,7 @@
 			</div>
 			<div class="w-2/3 sm:w-5/6">
 				<p>
-					<span class=" font-bold">{product.item_data.total_stock}</span> left in stock
+					<span class=" font-bold">{productStock}</span> left in stock
 				</p>
 			</div>
 		</div>
@@ -170,15 +188,14 @@
 				/>
 			</div>
 		</div> -->
-		{#if product?.item_data?.sizes.length}
+		{#if product?.item_data?.variations?.length}
 			<div class="flex items-center justify-between pb-4">
 				<div class="w-1/3 sm:w-1/5">
-					<p class="font-hk text-secondary">Size:</p>
+					<p class="font-hk text-secondary">Variations:</p>
 				</div>
 				<div class="w-2/3 sm:w-5/6">
-					<form action="#">
-						<ul class="flex flex-wrap">
-							{#each product.item_data.sizes as size}
+					<ul class="flex flex-wrap">
+						<!-- {#each product.item_data.sizes as size}
 								<li class="mx-1">
 									<input class="hidden opacity-0" type="radio" name="radio-group" id="size1" />
 									<label
@@ -186,9 +203,24 @@
 										for="size1">{size.item_option_value_data.name}</label
 									>
 								</li>
-							{/each}
-						</ul>
-					</form>
+							{/each} -->
+						{#each product.item_data.variations as variation}
+							<li class="mx-1 my-1">
+								<button
+									on:click|preventDefault={() =>
+										handleDataVariations(variation.id, variation.item_variation_data)}
+								>
+									<input class="hidden opacity-0" type="radio" name="radio-group" id="size1" />
+									<label
+										class={`py-2 px-2 leading-none text-sm flex items-center justify-center transition-all ${
+											variationActive === variation.id ? ' bg-red-400 text-white' : 'bg-gray-300'
+										} cursor-pointer capitalize`}
+										for="size1">{variation.item_variation_data.name}</label
+									>
+								</button>
+							</li>
+						{/each}
+					</ul>
 				</div>
 			</div>
 		{/if}
@@ -208,17 +240,7 @@
 		</div>
 
 		<div class="flex items-center pt-4 pb-4">
-			<span class=" text-red-400 font-semibold text-3xl"
-				>{`${
-					product?.item_data?.variations[0]
-						? `RM${(
-								Math.round(
-									product?.item_data?.variations[0]?.item_variation_data?.price_money?.amount * 1
-								) / 100
-						  ).toFixed(2)}`
-						: '-'
-				}`}</span
-			>
+			<span class=" text-red-400 font-semibold text-3xl">{`${productPrice}`}</span>
 			<!-- <span class="pl-5 font-hk text-xl text-grey-darker line-through">$35.0</span> -->
 		</div>
 
@@ -276,8 +298,10 @@
 									<tr>
 										<td class="border-2 px-4 py-2">Color</td>
 										<td class="border-2 px-4 py-2 font-bold">
-											{#each product.item_data.colors as color}
-												{`${color.item_option_value_data.name}, `}
+											{#each product.item_data.colors as color, i}
+												{i > 0
+													? `${color.item_option_value_data.name}, `
+													: `${color.item_option_value_data.name}`}
 											{/each}
 										</td>
 									</tr>

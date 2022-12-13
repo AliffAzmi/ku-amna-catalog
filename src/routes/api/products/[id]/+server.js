@@ -24,6 +24,7 @@ export async function GET ({ params }) {
 
             const variation_objs = {}
             variation_objs.catalog_object_ids = item_data.variations.map(variation => variation.id)
+            item_data.variations.map(async v => v.item_variation_data.stock = await getProductStock2(v.id))
 
             let productVariations = {}
             if(item_data.item_options){
@@ -82,6 +83,21 @@ const getProductVariations = async (options, variations) => {
     } catch (error) {
         return error
     }
+}
+
+const getProductStock2 = async (id) => {
+    var url = `${ SQUAREUP_API_URL }/inventory/${id}`
+    const option = {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${ SQUAREUP_ACCESS_TOKEN }`
+        },
+        // body: JSON.stringify(variation_objs)
+    }
+
+    const response = await fetch(url, option)
+    let res = await response.json()
+    return res
 }
 
 const getProductStock = async (variation_objs) => {
