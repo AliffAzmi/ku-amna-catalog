@@ -205,13 +205,16 @@
 								</li>
 							{/each} -->
 						{#each product.item_data.variations as variation}
-							{#if variation.item_variation_data.name}
+							{#if variation.item_variation_data.name && variation.item_variation_data?.stock?.counts}
 								<li class="mx-1 my-1">
 									<button
 										on:click|preventDefault={() =>
 											handleDataVariations(variation.id, variation.item_variation_data)}
 									>
 										<input class="hidden opacity-0" type="radio" name="radio-group" id="size1" />
+										<!-- {#if variation.item_variation_data.stockcounts[0].quantity}
+											
+										{/if} -->
 										<label
 											class={`py-2 px-2 leading-none text-sm flex items-center justify-center transition-all ${
 												variationActive === variation.id ? ' bg-red-400 text-white' : 'bg-gray-300'
