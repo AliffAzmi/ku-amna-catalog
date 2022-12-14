@@ -34,6 +34,7 @@
 
 <svelte:head>
 	<title>{toTitleCase(slug)} - Fizlin Mohammad</title>
+	<meta property="og:image" content={productFeaturedImage?.image_data?.url} />
 </svelte:head>
 
 <section class="py-8">

@@ -27,7 +27,7 @@
 </script>
 
 <svelte:head>
-	<title>Categories - Fizlin Mohammad</title>
+	<title>{toTitleCase(slug)} - Fizlin Mohammad</title>
 </svelte:head>
 
 <section class="py-8">
