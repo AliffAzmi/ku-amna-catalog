@@ -73,7 +73,7 @@
 					class="pl-3 inline-block no-underline"
 					target="_blank"
 					rel="noreferrer"
-					href="wa.link/wyfmjo"
+					href="https://wa.link/wyfmjo"
 				>
 					<Icon class="w-6 h-6 text-orange-600" icon="logos:whatsapp-icon" />
 				</a>
@@ -81,7 +81,7 @@
 					class="pl-3 inline-block no-underline"
 					target="_blank"
 					rel="noreferrer"
-					href="https://t.me/AliffAzmiey"
+					href="https://t.me/EyleenMohammad"
 				>
 					<Icon class="w-6 h-6" icon="logos:telegram" />
 				</a>

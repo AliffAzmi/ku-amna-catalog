@@ -8,7 +8,7 @@
 	import ProductList from './ProductList.svelte';
 	import BreadCrumbs from './BreadCrumbs.svelte';
 
-	import { slugify } from '$lib/utils'
+	import { slugify } from '$lib/utils';
 
 	import 'swiper/css';
 	import 'swiper/css/free-mode';
@@ -235,11 +235,13 @@
 					</button>
 				</a>
 				<div class=" ml-2">
-					<button
-						class=" bg-black leading-none py-4 px-5 md:px-8 font-normal text-sm h-11 text-white transition-all hover:bg-orange rounded inline-flex items-center gap-2"
-						>Chat with us
-						<Icon class="w-6 h-6" icon="ph:telegram-logo-light" /></button
-					>
+					<a href="https://t.me/+xL9WgvcuAtExMzc1" target="_blank" rel="noreferrer">
+						<button
+							class=" bg-black leading-none py-4 px-5 md:px-8 font-normal text-sm h-11 text-white transition-all hover:bg-orange rounded inline-flex items-center gap-2"
+							>Chat with us
+							<Icon class="w-6 h-6" icon="ph:telegram-logo-light" /></button
+						>
+					</a>
 				</div>
 			</div>
 		</div>
