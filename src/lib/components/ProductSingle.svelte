@@ -8,6 +8,8 @@
 	import ProductList from './ProductList.svelte';
 	import BreadCrumbs from './BreadCrumbs.svelte';
 
+	import { slugify } from '$lib/utils'
+
 	import 'swiper/css';
 	import 'swiper/css/free-mode';
 	import 'swiper/css/navigation';
@@ -28,7 +30,7 @@
 	export let productImages;
 	// export let productFeaturedImage;
 
-	productStock = product.item_data.total_stock;
+	productStock = product?.item_data?.total_stock;
 	productPrice = product?.item_data?.variations[0]
 		? `RM${(
 				Math.round(
@@ -94,7 +96,7 @@
 	};
 </script>
 
-<BreadCrumbs title={product.item_data.name} />
+<BreadCrumbs title={product?.item_data.name} />
 <div class="-mx-5 flex flex-col justify-between py-10 lg:flex-row">
 	<div class="flex flex-col-reverse justify-between px-5 sm:flex-row-reverse lg:w-1/2 lg:flex-row">
 		<div class="relative w-full pb-5 sm:pb-0">
@@ -155,18 +157,8 @@
 	<div class="px-5 pt-8 lg:w-1/2 lg:pt-0">
 		<div class="mb-8">
 			<div class="flex items-center">
-				<h2 class="font-butler text-3xl md:text-4xl lg:text-4.5xl">{product.item_data.name}</h2>
+				<h2 class="font-butler text-3xl md:text-4xl lg:text-4.5xl">{product?.item_data?.name}</h2>
 			</div>
-			<!-- <div class="flex items-center pt-3 pb-8">
-				<div class="flex items-center">
-					<i class="bx bxs-star text-primary" />
-					<i class="bx bxs-star text-primary" />
-					<i class="bx bxs-star text-primary" />
-					<i class="bx bxs-star text-primary" />
-					<i class="bx bxs-star text-primary" />
-				</div>
-				<span class="ml-2 font-hk text-sm text-secondary">(45)</span>
-			</div> -->
 		</div>
 		<div class="flex pb-5">
 			<div class="w-1/3 sm:w-1/5">
@@ -178,16 +170,6 @@
 				</p>
 			</div>
 		</div>
-		<!-- <div class="flex justify-between pb-4">
-			<div class="w-1/3 sm:w-1/5">
-				<p class="font-hk text-secondary">Color:</p>
-			</div>
-			<div class="flex w-2/3 items-center sm:w-5/6">
-				<div
-					class="mr-2 cursor-pointer rounded-full border-2 border-transparent bg-red-500 px-2 py-2 transition-colors hover:border-black"
-				/>
-			</div>
-		</div> -->
 		{#if product?.item_data?.variations?.length}
 			<div class="flex items-center justify-between pb-4">
 				<div class="w-1/3 sm:w-1/5">
@@ -195,15 +177,6 @@
 				</div>
 				<div class="w-2/3 sm:w-5/6">
 					<ul class="flex flex-wrap">
-						<!-- {#each product.item_data.sizes as size}
-								<li class="mx-1">
-									<input class="hidden opacity-0" type="radio" name="radio-group" id="size1" />
-									<label
-										class="py-2 px-2 leading-none text-sm flex items-center justify-center transition-all bg-gray-300 cursor-pointer capitalize"
-										for="size1">{size.item_option_value_data.name}</label
-									>
-								</li>
-							{/each} -->
 						{#each product.item_data.variations as variation}
 							{#if variation.item_variation_data.name && variation.item_variation_data?.stock?.counts}
 								<li class="mx-1 my-1">
@@ -212,9 +185,6 @@
 											handleDataVariations(variation.id, variation.item_variation_data)}
 									>
 										<input class="hidden opacity-0" type="radio" name="radio-group" id="size1" />
-										<!-- {#if variation.item_variation_data.stockcounts[0].quantity}
-											
-										{/if} -->
 										<label
 											class={`py-2 px-2 leading-none text-sm flex items-center justify-center transition-all ${
 												variationActive === variation.id ? ' bg-red-400 text-white' : 'bg-gray-300'
@@ -237,9 +207,9 @@
 				<a
 					class=" font-semibold text-blue-500"
 					on:click={categoryID.set(productCategory.id)}
-					href="/category/{productCategory.category_data.name.toLowerCase().replaceAll(' ', '-')}"
+					href="/category/{slugify(productCategory.category_data?.name, productCategory.id)}"
 				>
-					{productCategory.category_data.name}
+					{productCategory.category_data?.name}
 				</a>
 			</div>
 		</div>
@@ -250,8 +220,8 @@
 		</div>
 
 		<div class="mb-8 text-secondary">
-			{@html product.item_data.description_html.split('</p>')[0]}
-			{@html product.item_data.description_html.split('</p>')[1]}
+			{@html product?.item_data.description_html.split('</p>')[0]}
+			{@html product?.item_data.description_html.split('</p>')[1]}
 		</div>
 
 		<div class="mb-8">
@@ -288,7 +258,7 @@
 		<div class="bg-grey-light transition-opacity active">
 			<div class="mx-auto text-center sm:text-left">
 				<div class=" leading-loose text-sm">
-					{@html product.item_data.description_html}
+					{@html product?.item_data.description_html}
 				</div>
 			</div>
 		</div>

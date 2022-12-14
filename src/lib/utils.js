@@ -1,7 +1,16 @@
+export const slugify = (name, id) => {
+    const slug = `${name.replaceAll(' ', '-').toLowerCase()}-${id.toLowerCase()}`
+    return slug.trim()
+}
+
 export function toTitleCase (str) {
-    return str.replaceAll('-', ' ').replace(/\w\S*/g, function (txt) {
+    let newTxt = str.replaceAll('-', ' ').replace(/\w\S*/g, function (txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
+
+    let newTxtArr = newTxt.trim().split(' ')
+    newTxtArr.pop()
+    return newTxtArr.join(' ')
 };
 
 export function lazyAll (node, params) {
@@ -9,7 +18,6 @@ export function lazyAll (node, params) {
 		entries.forEach(entry => {
 			if(!entry.isIntersecting) return;
 			const { target } = entry;
-			// target.setAttribute('alt', 'A lazy dog')
 			target.setAttribute('src', target.dataset.src ? target.dataset.src : '')
 			observer.unobserve(target)
 		})

@@ -1,7 +1,8 @@
 <script>
 	// import { onMount } from 'svelte';
 	// import { lazyLoad } from '$lib/utils';
-	import { productID } from '$lib/stores';
+	// import { productID } from '$lib/stores';
+	import { slugify } from '$lib/utils'
 
 	export let item;
 	// let loaded = false;
@@ -12,13 +13,14 @@
 	// 		loaded = true;
 	// 	};
 	// });
+	
 </script>
 
 <div class=" w-full md:w-1/3 xl:w-1/4 p-2 flex flex-col">
 	<a
-		href="/products/{item?.item_data?.name.replaceAll(' ', '-').toLowerCase()}"
-		on:click={productID.set(item.id)}
-	>
+		href="/products/{slugify(item?.item_data?.name, item.id)}"
+		>
+		<!-- on:click={productID.set(item.id)} -->
 		<div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
 			<div
 				class="flex items-end justify-end h-56 w-full bg-cover hover:grow hover:shadow-lg"

@@ -1,12 +1,13 @@
 <script>
 	import { onMount } from 'svelte';
-	import { productID } from '$lib/stores';
+	// import { productID } from '$lib/stores';
 	import { page } from '$app/stores';
 	import { toTitleCase } from '$lib/utils';
 	import ProductSingle from '$lib/components/ProductSingle.svelte';
 	import SkeletonProductSingle from '$lib/components/SkeletonProductSingle.svelte';
 
 	export let { slug } = $page.params;
+	let productID = slug.substring(slug.lastIndexOf('-') + 1).toUpperCase();
 	let loading = true;
 	let product = {};
 	let productCategory = {};
@@ -14,7 +15,7 @@
 	let productImages = [];
 
 	onMount(async () => {
-		const response = await fetch(`/api/products/${$productID}`, {
+		const response = await fetch(`/api/products/${productID}`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'

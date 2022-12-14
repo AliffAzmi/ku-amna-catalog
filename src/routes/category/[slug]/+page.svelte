@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { categoryID } from '$lib/stores';
+	// import { categoryID } from '$lib/stores';
 	import { toTitleCase } from '$lib/utils';
 	import ProductList from '$lib/components/ProductList.svelte';
 	import ProductLabel from '$lib/components/ProductLabel.svelte';
@@ -9,11 +9,12 @@
 
 	export let { slug } = $page.params;
 
+	let categoryID = slug.substring(slug.lastIndexOf('-') + 1).toUpperCase();
 	let loading = true;
 	let products = [];
 
 	onMount(async () => {
-		const response = await fetch(`/api/products?cat=${$categoryID}`, {
+		const response = await fetch(`/api/products?cat=${categoryID}`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'

@@ -1,5 +1,6 @@
 <script>
-	import { categoryID } from '$lib/stores';
+	// import { categoryID } from '$lib/stores';
+	import { slugify } from '$lib/utils';
 
 	export let categories;
 </script>
@@ -10,10 +11,8 @@
 			class="h-64 mt-8 md:mx-4 rounded-md overflow-hidden bg-cover hover:grow hover:shadow-lg bg-top w-full"
 			style="background-image: url('./images/{category?.img_url}')"
 		>
-			<a
-				href={`/category/${category?.category_data?.name.replaceAll(' ', '-').toLowerCase()}`}
-				on:click={categoryID.set(category.id)}
-			>
+			<a href={`/category/${slugify(category?.category_data?.name, category.id)}`}>
+				<!-- on:click={categoryID.set(category.id)} -->
 				<div class="bg-gray-900 bg-opacity-50 flex items-center h-full">
 					<div class="px-10 max-w-xl">
 						<h2 class="text-2xl text-white font-semibold">{category?.category_data?.name}</h2>
