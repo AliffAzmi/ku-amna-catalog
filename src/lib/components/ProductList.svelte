@@ -19,11 +19,12 @@
 	<a href="/products/{slugify(item?.item_data?.name, item.id)}">
 		<!-- on:click={productID.set(item.id)} -->
 		<div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
-			<div
-				class="flex items-end justify-end h-[22rem] w-full bg-cover hover:grow hover:shadow-lg"
+			<img alt="product_image" src={item?.img_url} class=" hover:grow hover:shadow-lg" />
+			<!-- <div
+				class="flex items-end justify-end h-60 w-full bg-cover hover:grow hover:shadow-lg"
 				style="background-image: url('{item?.img_url}')"
-			>
-				<!-- <button
+			> -->
+			<!-- <button
 				class="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
 			>
 				<svg
@@ -39,7 +40,7 @@
 					/></svg
 				>
 			</button> -->
-			</div>
+			<!-- </div> -->
 			<div class="px-5 py-3">
 				<h3 class="text-gray-700 uppercase">{item?.item_data?.name}</h3>
 				<span class="text-gray-500 mt-2"
