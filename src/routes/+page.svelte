@@ -4,6 +4,7 @@
 	import CategoriesGrid from '$lib/components/CategoriesGrid.svelte';
 	import ProductLabel from '$lib/components/ProductLabel.svelte';
 	import SkeletonProducts from '$lib/components/SkeletonProducts.svelte';
+	import Sliders from '../lib/components/partial/Sliders.svelte';
 
 	const categories = $$props?.data?.categories || [];
 	let products;

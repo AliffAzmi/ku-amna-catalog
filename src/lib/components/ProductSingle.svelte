@@ -3,6 +3,7 @@
 	import Icon from '@iconify/svelte';
 	import { Swiper, SwiperSlide } from 'swiper/svelte';
 	import { FreeMode, Navigation, Thumbs } from 'swiper';
+	import { Swiper as Swiper2 } from 'swiper/svelte';
 
 	import { categoryID } from '$lib/stores';
 	import ProductList from './ProductList.svelte';
@@ -14,6 +15,7 @@
 	import 'swiper/css/free-mode';
 	import 'swiper/css/navigation';
 	import 'swiper/css/thumbs';
+	import ProductMobileSwapper from './ProductMobileSwapper.svelte';
 
 	let loading = true;
 	let productStock = 0;
@@ -96,9 +98,12 @@
 	};
 </script>
 
-<BreadCrumbs title={product?.item_data.name} />
-<div class="-mx-5 flex flex-col justify-between py-10 lg:flex-row">
-	<div class="flex flex-col-reverse justify-between px-5 sm:flex-row-reverse lg:w-1/2 lg:flex-row">
+<!-- <BreadCrumbs title={product?.item_data.name} /> -->
+<ProductMobileSwapper {productImages} {thumbsSwiper} {breakpoints} />
+<div class="-mx-5 flex flex-col justify-between lg:flex-row">
+	<div
+		class="lg:flex flex-col-reverse justify-between px-5 sm:flex-row-reverse lg:w-1/2 lg:flex-row hidden"
+	>
 		<div class="relative w-full pb-5 sm:pb-0">
 			<Swiper
 				style="--swiper-navigation-color: #fff;--swiper-pagination-color: #fff"
@@ -106,13 +111,12 @@
 				spaceBetween={12}
 				navigation={true}
 				modules={[FreeMode, Navigation, Thumbs]}
-				class="mySwiper2"
+				class="productFeatureSliderDesktop"
 				thumbs={{ swiper: thumbsSwiper }}
 			>
 				{#each productImages as item}
 					<SwiperSlide>
 						<span class=" absolute bottom-1 right-1 z-0">
-							<!-- on:click={handleDownloadImage(item?.image_data?.url)} -->
 							<button
 								class="px-2 py-2 bg-blue-500 rounded-full drop-shadow-lg text-sm text-center text-white duration-300 hover:bg-blue-700 flex items-center"
 								data-url={item?.image_data?.url}
@@ -135,7 +139,7 @@
 				freeMode={true}
 				watchSlidesProgress={true}
 				modules={[FreeMode, Navigation, Thumbs]}
-				class="mySwiper"
+				class="productGallerySliderDesktop"
 				{breakpoints}
 			>
 				{#each productImages as item}
@@ -154,10 +158,12 @@
 		</div>
 	</div>
 
-	<div class="px-5 pt-8 lg:w-1/2 lg:pt-0">
+	<div class="px-5 lg:w-1/2 lg:pt-0 pt-4">
 		<div class="mb-8">
 			<div class="flex items-center">
-				<h2 class="font-butler text-3xl md:text-4xl lg:text-4.5xl">{product?.item_data?.name}</h2>
+				<h2 class="text-xl font-bold" style="text-transform: capitalize !important;">
+					{product?.item_data?.name}
+				</h2>
 			</div>
 		</div>
 		<div class="flex pb-5">
@@ -250,15 +256,13 @@
 
 <div class="pb-16">
 	<div class="flex flex-col sm:flex-row border-b border-grey-dark py-4">
-		<span
-			class="text-center font-hk font-bold text-2xl text-secondary hover:bg-grey-light sm:text-left"
-		>
+		<span class="text-xl font-bold" style="text-transform: capitalize !important;">
 			Description
 		</span>
 	</div>
 	<div class="relative py-4">
 		<div class="bg-grey-light transition-opacity active">
-			<div class="mx-auto text-center sm:text-left">
+			<div class="mx-auto">
 				<div class=" leading-loose text-sm">
 					{@html product?.item_data.description_html}
 				</div>
@@ -301,7 +305,7 @@
 </div>
 
 <div class="pb-16 sm:pb-20 md:pb-24">
-	<h2 class="font-playfair font-bold text-primary text-3xl md:text-4xl lg:text-xl mb-4">
+	<h2 class="text-xl font-bold" style="text-transform: capitalize !important;">
 		RELATED PRODUCTS
 	</h2>
 	<div class="flex items-center flex-wrap">

@@ -4,22 +4,25 @@
 
 	export let open = false;
 	let y;
+
+	const handleMenuButton = () => {
+		y = 60;
+		open = !open;
+	};
 </script>
 
 <svelte:window bind:scrollY={y} />
 
-<header
-	class:bg_scoll={y > 50}
-	class=" bg-inherit md:bg-transparent lg:bg-transparent sticky top-0 z-50 m-0 md:-m-24 lg:-m-24"
->
+<header class:bg_scoll={y > 50} class=" bg-transparent sticky top-0 z-50 -mt-24">
 	<nav id="header" class="w-full h-24 z-30 top-0 py-1">
 		<div
 			class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3"
 		>
 			<button
+				aria-label="Menu"
 				class="text-gray-500 hover:text-gray-700 cursor-pointer mr-4 border-none focus:outline-none md:hidden block"
 				class:open
-				on:click={() => (open = !open)}
+				on:click={handleMenuButton}
 			>
 				<label for="menu-toggle" class="cursor-pointer md:hidden block">
 					<!-- <Icon icon="ci:hamburger-lg" width="30" height="30" /> -->

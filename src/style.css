@@ -1,72 +1,98 @@
 .swiper {
-  width: 100%;
-  height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 .swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
+	text-align: center;
+	font-size: 18px;
+	background: #fff;
 
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  align-items: center;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	align-items: center;
 }
 
 .swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 .swiper {
-  width: 100%;
-  height: 300px;
-  margin-left: auto;
-  margin-right: auto;
+	width: 100%;
+	height: 300px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .swiper-slide {
-  background-size: cover;
-  background-position: center;
+	background-size: cover;
+	background-position: center;
 }
 
-.mySwiper2 {
-  height: 80%;
-  width: 100%;
+.productFeatureSliderMobile {
+	height: 60vh;
+	width: 46vh;
+  /* margin: 0 -1.4rem; */
+	margin-left: -15px !important;
 }
 
-.mySwiper {
-  height: 20%;
-  box-sizing: border-box;
-  padding: 10px 0 !important;
+.productFeatureSliderDesktop {
+	height: 80%;
+	width: 100%;
+	/* margin-left: -15px !important; */
 }
 
-.mySwiper .swiper-slide {
-  width: 25%;
-  height: 100%;
-  opacity: 0.4;
-  @apply cursor-pointer;
+.productGallerySliderDesktop {
+  height: 20% ;
+	box-sizing: border-box;
+	padding: 10px 0 !important;
 }
 
-.mySwiper .swiper-slide-thumb-active {
-  opacity: 1;
-  @apply border-4 border-red-400;
+.productGallerySliderDesktop .swiper-slide {
+	width: 25%;
+	height: 100%;
+	opacity: 0.4;
+	@apply cursor-pointer;
+}
+
+.productGallerySliderDesktop .swiper-slide-thumb-active {
+	opacity: 1;
+	@apply border border-red-400;
+}
+
+.productGallerySliderMobile {
+	height: 15vh;
+	box-sizing: border-box;
+	padding: 10px 0 !important;
+}
+
+.productGallerySliderMobile .swiper-slide {
+	width: 25%;
+	height: 100%;
+	opacity: 0.4;
+	@apply cursor-pointer;
+}
+
+.productGallerySliderMobile .swiper-slide-thumb-active {
+	opacity: 1;
+	@apply border border-red-400;
 }
 
 .swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }

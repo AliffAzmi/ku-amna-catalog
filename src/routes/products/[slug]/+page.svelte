@@ -37,7 +37,7 @@
 	<meta property="og:image" content={productFeaturedImage?.image_data?.url} />
 </svelte:head>
 
-<section class="py-8">
+<section class="py-8 mt-20">
 	{#if loading}
 		<SkeletonProductSingle />
 	{:else}

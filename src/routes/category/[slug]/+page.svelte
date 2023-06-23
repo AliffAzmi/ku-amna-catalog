@@ -30,7 +30,7 @@
 	<title>{toTitleCase(slug)} - Fizlin Mohammad</title>
 </svelte:head>
 
-<section class="py-8">
+<section class="py-8 mt-20">
 	{#if loading}
 		<SkeletonProducts />
 	{:else}
