@@ -5,7 +5,7 @@
 	import { toTitleCase } from '$lib/utils';
 	import ProductList from '$lib/components/ProductList.svelte';
 	import ProductLabel from '$lib/components/ProductLabel.svelte';
-	import SkeletonProductList from '../../../lib/components/SkeletonProductList.svelte';
+	import SkeletonProducts from '$lib/components/SkeletonProducts.svelte';
 
 	export let { slug } = $page.params;
 
@@ -32,7 +32,7 @@
 
 <section class="py-8">
 	{#if loading}
-		<SkeletonProductList />
+		<SkeletonProducts />
 	{:else}
 		<div class="flex items-center flex-wrap">
 			<ProductLabel label={toTitleCase(slug)} />
