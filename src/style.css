@@ -44,19 +44,34 @@
 .productFeatureSliderMobile {
 	height: 60vh;
 	width: 46vh;
-  /* margin: 0 -1.4rem; */
+	/* margin: 0 -1.4rem; */
 	margin-left: -15px !important;
 	margin-right: -15px !important;
 }
 
+@media only screen and (max-width: 600px) {
+	.productFeatureSliderDesktop {
+		width: 100vw !important;
+    margin-left: -15px !important;
+	}
+}
+
 .productFeatureSliderDesktop {
+	/* position: absolute !important;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px; */
 	height: 80%;
 	width: 100%;
-	/* margin-left: -15px !important; */
+	/* width: 100vw; */
+	margin-left: -15px;
 }
 
 .productGallerySliderDesktop {
-  height: 20% ;
+	/* position: absolute !important;
+	bottom: 0; */
+	height: 20%;
 	box-sizing: border-box;
 	padding: 10px 0 !important;
 }

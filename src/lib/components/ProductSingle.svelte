@@ -3,7 +3,6 @@
 	import Icon from '@iconify/svelte';
 	import { Swiper, SwiperSlide } from 'swiper/svelte';
 	import { FreeMode, Navigation, Thumbs } from 'swiper';
-	import { Swiper as Swiper2 } from 'swiper/svelte';
 
 	import { categoryID } from '$lib/stores';
 	import ProductList from './ProductList.svelte';
@@ -15,7 +14,7 @@
 	import 'swiper/css/free-mode';
 	import 'swiper/css/navigation';
 	import 'swiper/css/thumbs';
-	import ProductMobileSwapper from './ProductMobileSwapper.svelte';
+	// import ProductMobileSwapper from './ProductMobileSwapper.svelte';
 
 	let loading = true;
 	let productStock = 0;
@@ -99,12 +98,12 @@
 </script>
 
 <!-- <BreadCrumbs title={product?.item_data.name} /> -->
-<ProductMobileSwapper {productImages} {thumbsSwiper} {breakpoints} />
+<!-- <ProductMobileSwapper {productImages} {thumbsSwiper} {breakpoints} /> -->
 <div class="-mx-5 flex flex-col justify-between lg:flex-row">
 	<div
-		class="lg:flex flex-col-reverse justify-between px-5 sm:flex-row-reverse lg:w-1/2 lg:flex-row hidden"
+		class="md:flex lg:flex flex-col-reverse justify-between px-5 sm:flex-row-reverse lg:w-1/2 lg:flex-row "
 	>
-		<div class="relative w-full pb-5 sm:pb-0">
+		<div class="relative w-full h-screen pb-5 sm:pb-0">
 			<Swiper
 				style="--swiper-navigation-color: #fff;--swiper-pagination-color: #fff"
 				loop={true}

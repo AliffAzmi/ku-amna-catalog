@@ -18,7 +18,8 @@
 	};
 </script>
 
-<div class=" block lg:hidden">
+<div class=" hidden">
+<!-- <div class=" block md:hidden lg:hidden"> -->
 	<Swiper
 		style="--swiper-navigation-color: #fff;--swiper-pagination-color: #fff"
 		loop={true}
