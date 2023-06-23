@@ -7,7 +7,7 @@ import {
 
 export async function GET ({ url }) {
 
-    const limit = url.searchParams.get('limit') || 10
+    const limit = url.searchParams.get('limit') || 8
     const categoryID = url.searchParams.get('cat')
     
     const option = {

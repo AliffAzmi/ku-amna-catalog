@@ -1,44 +1,60 @@
 <script>
 	import { page, navigating } from '$app/stores';
 	import Icon from '@iconify/svelte';
+
+	export let open = false;
 	let y;
 </script>
 
-<!-- on:scroll
-1. if < 50 add class transform: translate&Y(0%) else transform: translate&Y(-100%) -->
-
 <svelte:window bind:scrollY={y} />
 
-<header class=" bg-inherit sticky top-0 z-50 border-b-2 border-red-200">
-	<nav id="header" class="w-full z-30 top-0 py-1">
+<header
+	class:bg_scoll={y > 50}
+	class=" bg-inherit md:bg-transparent lg:bg-transparent sticky top-0 z-50 m-0 md:-m-24 lg:-m-24"
+>
+	<nav id="header" class="w-full h-24 z-30 top-0 py-1">
 		<div
 			class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3"
 		>
-			<label for="menu-toggle" class="cursor-pointer md:hidden block">
-				<svg
-					class="fill-current text-gray-900"
-					xmlns="http://www.w3.org/2000/svg"
-					width="20"
-					height="20"
-					viewBox="0 0 20 20"
-				>
-					<title>menu</title>
-					<path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-				</svg>
-			</label>
-			<input class="hidden" type="checkbox" checked={$navigating ? true : false} id="menu-toggle" />
+			<button
+				class="text-gray-500 hover:text-gray-700 cursor-pointer mr-4 border-none focus:outline-none md:hidden block"
+				class:open
+				on:click={() => (open = !open)}
+			>
+				<label for="menu-toggle" class="cursor-pointer md:hidden block">
+					<!-- <Icon icon="ci:hamburger-lg" width="30" height="30" /> -->
+
+					<!-- <svg
+						class="fill-current text-gray-900"
+						xmlns="http://www.w3.org/2000/svg"
+						width="20"
+						height="20"
+						viewBox="0 0 20 20"
+					> -->
+					<svg width="32" height="24">
+						<!-- <title>menu</title> -->
+						<!-- <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" /> -->
+						<line id="top" x1="0" y1="2" x2="32" y2="2" />
+						<line id="middle" x1="0" y1="12" x2="24" y2="12" />
+						<line id="bottom" x1="0" y1="22" x2="32" y2="22" />
+					</svg>
+				</label>
+			</button>
+			<!-- <input class="hidden" type="checkbox" checked={$navigating ? true : false} id="menu-toggle" /> -->
 
 			<div class="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1" id="menu">
 				<nav>
 					<ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
 						<li>
 							<a class="inline-block no-underline hover:text-black py-2 px-4" href="/"
-								><span class:active={$page.url.pathname === '/'}>Home</span></a
+								><span class=" font-bold" class:active={$page.url.pathname === '/'}>Home</span></a
 							>
 						</li>
 						<li>
 							<a class="inline-block no-underline hover:text-black py-2 px-4" href="/products"
-								><span class:active={$page.url.pathname === '/products'}>Our Products</span></a
+								><span class=" font-bold" class:active={$page.url.pathname === '/products'}
+									>Our Products</span
+								></a
 							>
 						</li>
 					</ul>
@@ -50,8 +66,8 @@
 					class="flex items-center tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl "
 					href="/"
 				>
-					<!-- height={y < 50 ? 150 : 130} -->
 					<img
+						class:logo_transition={y > 50}
 						class=" mr-2"
 						width={y < 50 ? 150 : 130}
 						src="/images/fm_logo_rectangle.png"
@@ -122,5 +138,35 @@
 <style>
 	.active {
 		@apply border-b-2 border-red-300;
+	}
+	.logo_transition {
+		@apply transition-all;
+	}
+	.bg_scoll {
+		@apply bg-inherit transition-all;
+	}
+
+	svg {
+		min-height: 24px;
+		transition: transform 0.3s ease-in-out;
+	}
+
+	svg line {
+		stroke: currentColor;
+		stroke-width: 3;
+		transition: transform 0.3s ease-in-out;
+	}
+
+	.open svg {
+		transform: scale(0.7);
+	}
+	.open #top {
+		transform: translate(6px, 0px) rotate(45deg);
+	}
+	.open #middle {
+		opacity: 0;
+	}
+	.open #bottom {
+		transform: translate(-12px, 9px) rotate(-45deg);
 	}
 </style>

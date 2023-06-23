@@ -12,6 +12,7 @@
 	import Sliders from '$lib/components/partial/Sliders.svelte';
 	import Footer from '$lib/components/partial/Footer.svelte';
 	import Analytics from '$lib/components/Analytics.svelte';
+	import Sidebar from '$lib/components/partial/Sidebar.svelte';
 
 	NProgress.configure({
 		template:
@@ -29,9 +30,11 @@
 		}
 	}
 	$: $loading = $navigating ? true : false;
+	let open = false;
 </script>
 
-<Header />
+<Sidebar bind:open />
+<Header bind:open />
 <Sliders />
 <Analytics />
 <main class="container mx-auto px-4 scroll-smooth">

@@ -8,11 +8,11 @@ import {
 export async function load ({ url, params }) {
     try {
       const categories = await getPayload('CATEGORY')
-      const products = await getPayload('ITEM')
+    //   const products = await getPayload('ITEM')
       return {
           status: 200,
           categories: categories,
-          products: products
+        //   products: products
       }
     } catch (error) {
         return error
@@ -35,7 +35,7 @@ const getPayload = async (type, limit=8) => {
         if(resJSON.objects){
             payload = Promise.all(resJSON.objects.slice(0, limit).map(async item => {
                 if(item.type === 'CATEGORY'){
-                    item.img_url = `${item.category_data.name.split(' ').join('_').toLowerCase()}_cat_cover.png`
+                    item.img_url = `${item.category_data.name.split(' ').join('_').toLowerCase()}_cat_cover.webp`
                 } else {
                     item.img_url = await getFeaturedImage(item)
                 }

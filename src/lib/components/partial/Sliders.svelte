@@ -18,7 +18,7 @@
 		{
 			id: 'carousel-1',
 			num: 1,
-			bg_img: '/images/banner_1.png',
+			bg_img: '/images/banner_1.webp',
 			target: '_blank',
 			url: 'https://forms.gle/XkTgSif4E5Vu4gNU8'
 		}
@@ -37,7 +37,7 @@
 				hidden
 				checked="checked"
 			/>
-			<div class="carousel-item absolute opacity-0" style="height:50vh;">
+			<div class="carousel-item absolute opacity-0" style="height:80vh;">
 				<a href={slider.url ? slider.url : '#'} target={slider.target}>
 					<div
 						class="h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-center"
