@@ -95,6 +95,8 @@
 		productPrice = `RM${(Math.round(data?.price_money?.amount * 1) / 100).toFixed(2)}`;
 		variationActive = item_id;
 	};
+
+	console.log(product?.item_data?.variations)
 </script>
 
 <!-- <BreadCrumbs title={product?.item_data.name} /> -->
@@ -183,7 +185,7 @@
 				<div class="w-2/3 sm:w-5/6">
 					<ul class="flex flex-wrap">
 						{#each product.item_data.variations as variation}
-							{#if variation.item_variation_data.name && variation.item_variation_data?.stock?.counts}
+							<!-- {#if variation.item_variation_data.name && variation.item_variation_data?.stock?.counts} -->
 								<li class="mx-1 my-1">
 									<button
 										on:click|preventDefault={() =>
@@ -198,7 +200,7 @@
 										>
 									</button>
 								</li>
-							{/if}
+							<!-- {/if} -->
 						{/each}
 					</ul>
 				</div>
