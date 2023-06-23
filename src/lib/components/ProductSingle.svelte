@@ -329,7 +329,7 @@
 </div>
 
 <div class="pb-16 sm:pb-20 md:pb-24">
-	<h2 class="text-xl font-bold" style="text-transform: capitalize !important;">RELATED PRODUCTS</h2>
+	<h2 class="text-xl font-bold" style="text-transform: capitalize !important;">Related Products</h2>
 	<div class="flex items-center flex-wrap">
 		{#if loading}
 			Loading
