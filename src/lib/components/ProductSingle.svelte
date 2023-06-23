@@ -16,11 +16,13 @@
 	import 'swiper/css/thumbs';
 	// import ProductMobileSwapper from './ProductMobileSwapper.svelte';
 
+	let mySwiper;
 	let loading = true;
 	let productStock = 0;
 	let productPrice = 0;
 	let relatedProducts = [];
 	let thumbsSwiper = null;
+	let featureSwiper = null;
 	let variationActive = '';
 	let breakpoints = {
 		320: { spaceBetween: 8 },
@@ -50,20 +52,6 @@
 		const { objects } = await response.json();
 		relatedProducts = objects;
 		loading = false;
-
-		// const swiper = document.querySelector('.mySwiper2');
-		// swiper.querySelectorAll('.swiper-slide-active').forEach((span) => {
-		// 	const img = span.querySelector('img');
-		// 	const button = span.querySelector('#donwload_image');
-		// 	toDataUrl(img, function (myBase64) {
-		// 		const a = document.createElement('a');
-		// 		a.id = 'testttt';
-		// 		a.href = myBase64;
-		// 		a.text = 'download';
-		// 		a.download = img.src.replace(/^.*[\\\/]/, '');
-		// 		button.appendChild(a);
-		// 	});
-		// });
 	});
 
 	function toDataUrl(url, callback) {
@@ -90,13 +78,43 @@
 		});
 	};
 
+	const setFeatureSwiper = (e) => {
+		const [swiper] = e.detail;
+		setTimeout(() => {
+			featureSwiper = swiper;
+		});
+	};
+
 	const handleDataVariations = (item_id, data) => {
 		productStock = data.stock ? data.stock.counts[0].quantity : 0;
 		productPrice = `RM${(Math.round(data?.price_money?.amount * 1) / 100).toFixed(2)}`;
 		variationActive = item_id;
-	};
 
-	console.log(product?.item_data?.variations)
+		if (data?.image_ids?.length) {
+			var image_id = data.image_ids[0];
+			var active_index = null;
+			var active_element;
+
+			thumbsSwiper.slides.forEach((element) => {
+				var el_image_id = element.getAttribute('id');
+				element.classList.remove('swiper-slide-thumb-active');
+				if (el_image_id === image_id) {
+					var el_selected_index = element.getAttribute('data-swiper-slide-index');
+					active_index = parseInt(el_selected_index);
+					active_element = element;
+				}
+			});
+
+			if (active_index !== null && active_element) {
+				active_element.classList.add('swiper-slide-thumb-active');
+				thumbsSwiper.slideToLoop(parseInt(active_index), 1000);
+				featureSwiper.slideToLoop(parseInt(active_index));
+			}
+		}
+		// console.log(thumbsSwiper.slides);
+		// console.log(thumbsSwiper.thumbs);
+		// console.log(thumbsSwiper.slides[4].dataset);
+	};
 </script>
 
 <!-- <BreadCrumbs title={product?.item_data.name} /> -->
@@ -107,16 +125,18 @@
 	>
 		<div class="relative w-full h-screen pb-5 sm:pb-0">
 			<Swiper
-				style="--swiper-navigation-color: #fff;--swiper-pagination-color: #fff"
+				on:swiper={setFeatureSwiper}
+				style="--swiper-navigation-color: gray;--swiper-pagination-color: #fff"
 				loop={true}
 				spaceBetween={12}
 				navigation={true}
 				modules={[FreeMode, Navigation, Thumbs]}
 				class="productFeatureSliderDesktop"
 				thumbs={{ swiper: thumbsSwiper }}
+				bind:swiper={mySwiper}
 			>
 				{#each productImages as item}
-					<SwiperSlide>
+					<SwiperSlide id={item.id} data-image_id={item.id}>
 						<span class=" absolute bottom-1 right-1 z-0">
 							<button
 								class="px-2 py-2 bg-blue-500 rounded-full drop-shadow-lg text-sm text-center text-white duration-300 hover:bg-blue-700 flex items-center"
@@ -141,10 +161,13 @@
 				watchSlidesProgress={true}
 				modules={[FreeMode, Navigation, Thumbs]}
 				class="productGallerySliderDesktop"
+				loopedSlides={5}
 				{breakpoints}
 			>
 				{#each productImages as item}
-					<SwiperSlide><img src={item?.image_data?.url} alt="product img slider" /></SwiperSlide>
+					<SwiperSlide id={item.id} data-image_id={item.id}>
+						<img src={item?.image_data?.url} alt="product img slider" />
+					</SwiperSlide>
 				{/each}
 			</Swiper>
 			<!-- <div
@@ -172,7 +195,7 @@
 				<p class="text-secondary">Availability:</p>
 			</div>
 			<div class="w-2/3 sm:w-5/6">
-				<p>
+				<p class={productStock === '0' || productStock === 0 ? ' text-red-500' : ''}>
 					<span class=" font-bold">{productStock}</span> left in stock
 				</p>
 			</div>
@@ -186,20 +209,20 @@
 					<ul class="flex flex-wrap">
 						{#each product.item_data.variations as variation}
 							<!-- {#if variation.item_variation_data.name && variation.item_variation_data?.stock?.counts} -->
-								<li class="mx-1 my-1">
-									<button
-										on:click|preventDefault={() =>
-											handleDataVariations(variation.id, variation.item_variation_data)}
+							<li class="mx-1 my-1">
+								<button
+									on:click|preventDefault={() =>
+										handleDataVariations(variation.id, variation.item_variation_data)}
+								>
+									<input class="hidden opacity-0" type="radio" name="radio-group" id="size1" />
+									<label
+										class={`py-2 px-2 leading-none text-sm flex items-center justify-center transition-all ${
+											variationActive === variation.id ? ' bg-red-400 text-white' : 'bg-gray-300'
+										} cursor-pointer capitalize`}
+										for="size1">{variation.item_variation_data.name}</label
 									>
-										<input class="hidden opacity-0" type="radio" name="radio-group" id="size1" />
-										<label
-											class={`py-2 px-2 leading-none text-sm flex items-center justify-center transition-all ${
-												variationActive === variation.id ? ' bg-red-400 text-white' : 'bg-gray-300'
-											} cursor-pointer capitalize`}
-											for="size1">{variation.item_variation_data.name}</label
-										>
-									</button>
-								</li>
+								</button>
+							</li>
 							<!-- {/if} -->
 						{/each}
 					</ul>
@@ -306,9 +329,7 @@
 </div>
 
 <div class="pb-16 sm:pb-20 md:pb-24">
-	<h2 class="text-xl font-bold" style="text-transform: capitalize !important;">
-		RELATED PRODUCTS
-	</h2>
+	<h2 class="text-xl font-bold" style="text-transform: capitalize !important;">RELATED PRODUCTS</h2>
 	<div class="flex items-center flex-wrap">
 		{#if loading}
 			Loading

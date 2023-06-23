@@ -52,7 +52,7 @@
 @media only screen and (max-width: 600px) {
 	.productFeatureSliderDesktop {
 		width: 100vw !important;
-    margin-left: -15px !important;
+		margin-left: -15px !important;
 	}
 }
 
@@ -84,8 +84,7 @@
 }
 
 .productGallerySliderDesktop .swiper-slide-thumb-active {
-	opacity: 1;
-	@apply border border-red-400;
+	@apply opacity-100 border border-red-400;
 }
 
 .productGallerySliderMobile {
