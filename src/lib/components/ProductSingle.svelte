@@ -99,9 +99,12 @@
 				var el_image_id = element.getAttribute('id');
 				element.classList.remove('swiper-slide-thumb-active');
 				if (el_image_id === image_id) {
-					var el_selected_index = element.getAttribute('data-swiper-slide-index');
-					active_index = parseInt(el_selected_index);
-					active_element = element;
+
+					if(!element.classList.contains('swiper-slide-duplicate')){
+						var el_selected_index = element.getAttribute('data-swiper-slide-index');
+						active_index = parseInt(el_selected_index);
+						active_element = element;
+					}
 				}
 			});
 
