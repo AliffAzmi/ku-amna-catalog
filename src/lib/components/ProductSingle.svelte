@@ -99,8 +99,7 @@
 				var el_image_id = element.getAttribute('id');
 				element.classList.remove('swiper-slide-thumb-active');
 				if (el_image_id === image_id) {
-
-					if(!element.classList.contains('swiper-slide-duplicate')){
+					if (!element.classList.contains('swiper-slide-duplicate')) {
 						var el_selected_index = element.getAttribute('data-swiper-slide-index');
 						active_index = parseInt(el_selected_index);
 						active_element = element;
@@ -114,9 +113,6 @@
 				featureSwiper.slideToLoop(parseInt(active_index));
 			}
 		}
-		// console.log(thumbsSwiper.slides);
-		// console.log(thumbsSwiper.thumbs);
-		// console.log(thumbsSwiper.slides[4].dataset);
 	};
 </script>
 
@@ -277,6 +273,11 @@
 					</a>
 				</div>
 			</div>
+		</div>
+		<div>
+			<!-- ShareThis BEGIN -->
+			<div class="sharethis-inline-share-buttons" />
+			<!-- ShareThis END -->
 		</div>
 	</div>
 </div>
